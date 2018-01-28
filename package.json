@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/draconis79/everything_list_app_frontend#readme",
   "dependencies": {
+    "angular-drag-and-drop-lists": "^2.1.0",
+    "bcrypt": "^1.0.3",
     "express": "^4.16.2"
   }
 }
