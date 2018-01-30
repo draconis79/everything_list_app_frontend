@@ -1,78 +1,171 @@
-console.log('app.js');
+console.log('app.js working');
+const app = angular.module('MyListApp', []);
 
-const app = angular.module('EverythingListApp', []);
+app.controller('MainController', ['$http', function ($http) {
+  this.url = 'http://localhost:3000'
+  this.addForm = true;
 
-  app.controller('MainController', ['$http', function($http) {
 
-  this.test = 'test';
-  this.lists = [];
-  this.list = {};
-  this.showOne = false;
-  this.showEdit = 0;
-  this.task = {};
-  this.tasks = [];
-  this.url = 'http://localhost:3000/lists'
+  // ========================
+  // GET Route
+  // ========================
 
+  this.getLists = () => {
     $http({
-      method: 'GET',
-      url: this.url + 'lists'
-    }).then((response) => {
-      console.log("Response:", response.data);
-      this.lists = response.data;
-    }).catch((err) => {
-      console.log("Error:", err);
-    });
+      url: this.url + '/lists',
+      method: 'GET'
+    }).then(response => {
+      this.lists = response.data
+    }, error => {
+      // console.log(error.message);
+    }).catch(err => console.log(err))
+  }
 
-    this.listShow = (list) => {
-      this.showOne = !this.showOne;
-      this.list = list;
-      console.log("list:", list);
-    };
+  this.getLists();
 
-    this.createTask = () => {
-      $http({
-        method: 'POST',
-        url: this.url + "lists/" + this.list.id + '/tasks',
-        data: this.createForm
-      }).then((response) => {
-        console.log("New task:", response.data);
-        this.task = response.data;
-        this.tasks.unshift(this.task);
-      }).catch((err) => {
-        console.log("Error:", err);
-      })};
+  // ==============
+  // CREATE Route
+  // ==============
 
-    this.editTask = (task) => {
-      this.task = task;
-      console.log(this.task);
-      console.log("Edit button works");
-      $http({
-        method: 'PUT',
-        url: this.url + "lists/" + this.list.id + '/tasks/' + this.task.id,
-        data: this.editForm
-      }).then((response) => {
-        console.log("Edited task:", response.data);
-        this.task = response.data;
-      }).catch((err) => {
-        console.log("Error:", err);
-      })};
+  this.createForm = {}
 
-      this.showThisEdit = (task) => {
-        this.editForm = {};
-        this.showEdit = task.id;
-      };
+  this.processCreateForm = () => {
+    console.log('===');
+    $http({
+      url: this.url + '/lists',
+      method: 'POST',
+      data: this.createForm
+    }).then(response => {
+      this.lists.push(response.data);
+      this.createForm = {};
+    }).catch(err => console.log('Catch', err))
+  }
 
-      this.deleteTask = (taskToDelete) => {
-        console.log("Deleting:", taskToDelete.id);
-        $http({
-          method: 'DELETE',
-          url: this.url + "lists/" + this.list.id + '/tasks/' + taskToDelete.id
-        }).then((response) => {
-          const taskIndex = this.tasks.findIndex(task => this.task.id === taskToDelete.id);
-          this.tasks.splice(taskIndex, 1);
-        }).catch((err) => {
-          console.log("Error:", err);
-        })};
+  // ==============
+  // UPDATE Route
+  // ==============
 
+  this.createForm = {}
+
+  this.processEditForm = (list) => {
+    console.log(list);
+    $http({
+      url: this.url + '/lists/' + list.id,
+      method: 'PUT',
+      data: this.createForm
+    }).then(response => {
+      this.getLists();
+      this.createForm = {};
+    }, error => {
+      console.log(error.message);
+    }).catch(err => console.log(err))
+  }
+
+  // ==============
+  // DELETE Route
+  // ==============
+
+  this.deleteList = (id) => {
+    $http({
+      url: this.url + '/lists/' + id,
+      method: 'DELETE'
+    }).then(response => {
+      this.getLists();
+    }, error => {
+      console.log(error.message);
+    }).catch(err => console.log(err))
+  }
+
+  // // ========================
+  // // subjects starts here
+  // // ========================
+  //
+  //
+  // // ========================
+  // // GET Route Subject
+  // // ========================
+  //
+  // this.getSubjects = () => {
+  //   $http({
+  //     url: this.url + '/subjects'
+  //     method: 'GET'
+  //   }).then(response => {
+  //     this.subjects = response.data
+  //   }, error => {
+  //     // console.log(error.message);
+  //   }).catch(err => console.log(err))
+  // }
+  //
+  // this.getSubjects();
+
+  // // ==============
+  // // CREATE Route
+  // // ==============
+  //
+  // this.createForm = {}
+  //
+  // this.processCreateForm = () => {
+  //   console.log('===');
+  //   $http({
+  //     url: this.url + '/lists',
+  //     method: 'POST',
+  //     data: this.createForm
+  //   }).then(response => {
+  //     this.lists.push(response.data);
+  //     this.createForm = {};
+  //   }).catch(err => console.log('Catch', err))
+  // }
+  //
+  // // ==============
+  // // UPDATE Route
+  // // ==============
+  //
+  // this.createForm = {}
+  //
+  // this.processEditForm = (list) => {
+  //   console.log(list);
+  //   $http({
+  //     url: this.url + '/lists/' + list.id,
+  //     method: 'PUT',
+  //     data: this.createForm
+  //   }).then(response => {
+  //     this.getLists();
+  //     this.createForm = {};
+  //   }, error => {
+  //     console.log(error.message);
+  //   }).catch(err => console.log(err))
+  // }
+  //
+  // // ==============
+  // // DELETE Route
+  // // ==============
+  //
+  // this.deleteList = (id) => {
+  //   $http({
+  //     url: this.url + '/lists/' + id,
+  //     method: 'DELETE'
+  //   }).then(response => {
+  //     this.getLists();
+  //   }, error => {
+  //     console.log(error.message);
+  //   }).catch(err => console.log(err))
+  // }
 
 }]);
+
+// ======================
+// ratings.ejs functions
+// ======================
+
+function openNav() {
+  document.getElementById("mySidenav").style.width = "500px";
+}
+function openNavLogin() {
+  document.getElementById("mySidenavLogin").style.width = "250px";
+}
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+function closeNavLogin() {
+  document.getElementById("mySidenavLogin").style.width = "0";
+}

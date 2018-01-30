@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="MyListApp">
+<head>
+  <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+  <script type="text/javascript" src="/app.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>My List App</title>
+</head>
+<body ng-controller="MainController as ctrl">
+  <header class="topbackground1">
+    <h1>EveryList</h1>
+  </header>
+
+
+  <h2>Category</h2>
+  <main>
+    <div class="contain-in-theatres">
+      <div class="in-theatre" ng-repeat="list in ctrl.lists">
+        <div class="list-image">
+          <h3>{{list.category}}</h3>
+          <h4 ng-click="ctrl.deleteList(list.id)" class="add">Remove</h4>
+          <h4 ng-click="ctrl.toEdit = list" onclick="openNav()" class="add">Edit</h4>
+        </div>
+      </div>
+    </div>
+      <div class="new-list-container">
+        <h2 class="h2addList" ng-click="ctrl.addList()" class="add">Add New List</h2>
+        <div ng-show="ctrl.addForm">
+          <form ng-submit="ctrl.processCreateForm()">
+            <input type="text" ng-model="ctrl.createForm.category" placeholder="List Name">
+            <input type="submit">
+          </form>
+        </div>
+      </div>
+
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div>
+    <h2>Edit</h2>
+    <form class="editModal" ng-submit="ctrl.processEditForm(ctrl.toEdit)">
+      <div class="row">
+        <input type="text" ng-model="ctrl.createForm.category" placeholder="{{ctrl.toEdit.category}}">
+        <input type="submit">
+      </div>
+    </form>
+  </div>
+
+</div>
+
+
+
+
+    </main>
+    <footer class="footerLists">
+      <div class="footerListsText">
+        <p class="contactinfo" data-aos="fade-right" data-aos-easing="linear" data-aos-duration="500" >About</p>
+
+        <div class="footercenter">
+          <i data-aos="flip-down" data-aos-duration="1500" class="fa fa-facebook-official w3-hover-opacity"></i>
+        </div>
+        <br>
+    </div>
+
+  </footer>
+</body>
+</html>

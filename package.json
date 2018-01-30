@@ -20,6 +20,7 @@
   "dependencies": {
     "angular-drag-and-drop-lists": "^2.1.0",
     "bcrypt": "^1.0.3",
+    "ejs": "^2.5.7",
     "express": "^4.16.2"
   }
 }
