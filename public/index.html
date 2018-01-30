@@ -1,14 +1,79 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-    <script type="text/javascript" src="/app.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" />
-    <title>Everything List App</title>
-  </head>
-  <body>
+<html ng-app="EverythingListApp">
 
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Everything List App</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-sanitize.min.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-drag-and-drop-lists/1.2.0/angular-drag-and-drop-lists.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/app.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body ng-controller="MainController as ctrl">
+<div>
+
+
+  <!-- side nav login -->
+  <nav class="newNavBar">
+
+    <div class="NewNavBarLoginRegister">
+
+      <div class="sidenav" id="mySidenav">
+        <a class="closebtn" ng-click="ctrl.closeNav()">&times;</a>
+        <!--//////  Partials login ////-->
+        <div ng-include="'partials/login.html'"></div>
+        <!--//////  end of login partial ////-->
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- side nav Register -->
+  <nav class="newNavBar">
+
+    <div class="NewNavBarLoginRegister">
+
+      <div class="sidenav" id="mySideNavRegister">
+        <a class="closebtn" ng-click="ctrl.closeNavRegister()">&times;</a>
+        <!-- ////// Partials Register Form ////-->
+        <div ng-include="'partials/register.html'"></div>
+        <!--//////  end partials//// -->
+      </div>
+
+    </div>
+  </nav>
+  <!-- end of side nav -->
+
+  <div id="container">
+
+    <div id="title">
+      <h1>The Everylist</h1>
+    </div>
+
+    <div id="input-box">
+      <input id="input-box" type="text"></input>
+      <button id="submit">CREATE</button>
+    </div>
+
+    <div id="everylist">
+      <h3>TO DO</h3>
+    </div>
+
+    <div id="completed">
+      <h3>COMPLETED</h3>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+
 </html>
