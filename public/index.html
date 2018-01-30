@@ -6,8 +6,8 @@
   <title>Everything List App</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js" charset="utf-8"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-sanitize.min.js" charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-drag-and-drop-lists/1.2.0/angular-drag-and-drop-lists.js" charset="utf-8"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-sanitize.min.js" charset="utf-8"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-drag-and-drop-lists/1.2.0/angular-drag-and-drop-lists.js" charset="utf-8"></script> -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/app.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -20,37 +20,47 @@
 <div>
 
 
-  <!-- side nav login -->
-  <nav class="newNavBar">
+  <!-- list form -->
 
-    <div class="NewNavBarLoginRegister">
-
-      <div class="sidenav" id="mySidenav">
-        <a class="closebtn" ng-click="ctrl.closeNav()">&times;</a>
-        <!--//////  Partials login ////-->
-        <div ng-include="'partials/login.html'"></div>
-        <!--//////  end of login partial ////-->
+  <div id="container">
+  <div id="title">
+  <h1>The Everylist</h1>
+  <form ng-submit="ctrl.createTask()" ng-if="ctrl.showOne">
+    <input ng-model="ctrl.createForm.name" type="text" placeholder="Name">
+    <input ng-model="ctrl.createForm.task" type="text" placeholder="Task">
+    <input class="button" type="submit" value="Submit task">
+  </form>
+    <div id="input-box">
+  <div ng-repeat="task in ctrl.list.tasks" ng-if="ctrl.showOne">
+    <strong>List:</strong> {{ ctrl.name }}<br>
+    <strong>Task:</strong> {{ ctrl.task }}<br>
+    <form ng-submit="ctrl.showThisEdit(task)">
+      <input class="button" type="submit" value="Edit task">
+    </form>
       </div>
+    <form ng-submit="ctrl.deleteTask(task)">
+      <input class="button" type="submit" value="Delete task">
+    </form>
+    <hr>
+    <form ng-submit="ctrl.editTask(task)" ng-if="ctrl.showEdit === task.id">
+      <input ng-model="ctrl.editForm.name" type="text" placeholder="Name">
+      <input ng-model="ctrl.editForm.task" type="text" placeholder="Task">
+      <input class="button" type="submit" value="Edit task">
+    </form>
+  </div>
 
-    </div>
-  </nav>
+  <div class="list" ng-repeat="list in ctrl.lists">
+    <h3>{{ ctrl.name }}</h3>
+    <h2>{{ ctrl.task }}</h2>
+    <h2>{{ ctrl.test }}</h2>
+    <!-- <img ng-click="ctrl.listShow(list)" class="list-art" src="{{ list.img }}"> -->
+  </div>
 
-  <!-- side nav Register -->
-  <nav class="newNavBar">
+    <!-- list form ends here -->
 
-    <div class="NewNavBarLoginRegister">
-
-      <div class="sidenav" id="mySideNavRegister">
-        <a class="closebtn" ng-click="ctrl.closeNavRegister()">&times;</a>
-        <!-- ////// Partials Register Form ////-->
-        <div ng-include="'partials/register.html'"></div>
-        <!--//////  end partials//// -->
-      </div>
-
-    </div>
-  </nav>
-  <!-- end of side nav -->
-
+</div>
+  </div>
+  </div>
   <div id="container">
 
     <div id="title">
@@ -70,44 +80,6 @@
       <h3>COMPLETED</h3>
     </div>
 
-
-
-  <!-- list form -->
-
-
-  <form ng-submit="ctrl.createTask()" ng-if="ctrl.showOne">
-    <input ng-model="ctrl.createForm.name" type="text" placeholder="Name">
-    <input ng-model="ctrl.createForm.content" type="text" placeholder="Task">
-    <input class="button" type="submit" value="Submit task">
-  </form>
-
-  <div ng-repeat="task in ctrl.list.tasks" ng-if="ctrl.showOne">
-    <strong>Category:</strong> {{ task.name }}<br>
-    <strong>Task:</strong> {{ task.task }}<br>
-    <form ng-submit="ctrl.showThisEdit(task)">
-      <input class="button" type="submit" value="Edit task">
-    </form>
-    <form ng-submit="ctrl.deleteTask(task)">
-      <input class="button" type="submit" value="Delete task">
-    </form>
-    <hr>
-    <form ng-submit="ctrl.editTask(task)" ng-if="ctrl.showEdit === task.id">
-      <input ng-model="ctrl.editForm.name" type="text" placeholder="Name">
-      <input ng-model="ctrl.editForm.task" type="text" placeholder="Task">
-      <input class="button" type="submit" value="Edit task">
-    </form>
-  </div>
-
-  <div class="list" ng-repeat="list in ctrl.lists">
-    <h3>{{ list.name }}</h3>
-    <h2>{{ list.task }}</h2>
-    <!-- <img ng-click="ctrl.listShow(list)" class="list-art" src="{{ list.img }}"> -->
-  </div>
-
-    <!-- list form ends here -->
-
-</div>
-  </div>
 </body>
 
 </html>

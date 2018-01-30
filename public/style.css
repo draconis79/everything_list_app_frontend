@@ -33,6 +33,13 @@ body {
 	color: white;
 }
 
+.button {
+	height: 30px; width: 100px;
+	border: none;
+	background-color: grey;
+	color: white;
+}
+
 #everylist, #completed {
 	display: inline-block;
 	margin-left: 10px;

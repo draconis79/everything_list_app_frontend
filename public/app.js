@@ -4,6 +4,7 @@ const app = angular.module('EverythingListApp', []);
 
   app.controller('MainController', ['$http', function($http) {
 
+  this.test = 'test';
   this.lists = [];
   this.list = {};
   this.showOne = false;
