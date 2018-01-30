@@ -72,6 +72,40 @@
 
   </div>
 
+  <!-- list form -->
+
+
+  <form ng-submit="ctrl.createList_Item()" ng-if="ctrl.showOne">
+    <input ng-model="ctrl.createForm.title" type="text" placeholder="Title">
+    <input ng-model="ctrl.createForm.content" type="text" placeholder="Content">
+    <input class="button" type="submit" value="Submit list_item">
+  </form>
+
+  <div ng-repeat="list_item in ctrl.category.list_items" ng-if="ctrl.showOne">
+    <strong>Category:</strong> {{ list_item.title }}<br>
+    <strong>Item:</strong> {{ list_item.content }}<br>
+    <form ng-submit="ctrl.showThisEdit(list_item)">
+      <input class="button" type="submit" value="Edit list_item">
+    </form>
+    <form ng-submit="ctrl.deleteList_Item(list_item)">
+      <input class="button" type="submit" value="Delete list_item">
+    </form>
+    <hr>
+    <form ng-submit="ctrl.editList_Item(list_item)" ng-if="ctrl.showEdit === list_item.id">
+      <input ng-model="ctrl.editForm.title" type="text" placeholder="Title">
+      <input ng-model="ctrl.editForm.content" type="text" placeholder="Content">
+      <input class="button" type="submit" value="Edit list_item">
+    </form>
+  </div>
+
+  <div class="list_category" ng-repeat="list_category in ctrl.list_categories">
+    <h3>{{ list_category.title }}</h3>
+    <h2>{{ list_category.content }}</h2>
+    <!-- <img ng-click="ctrl.list_categoryShow(list_category)" class="list_category-art" src="{{ list_category.img }}"> -->
+  </div>
+
+    <!-- list form ends here -->
+
 </div>
 
 </body>
