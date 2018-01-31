@@ -2,7 +2,7 @@ console.log('app.js working');
 const app = angular.module('MyListApp', []);
 
 app.controller('MainController', ['$http', function ($http) {
-  this.url = 'http://localhost:3000'
+  this.url = 'https://everylist-api.herokuapp.com/'
   this.addForm = true;
 
 

@@ -6,7 +6,11 @@
   <script type="text/javascript" src="/app.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto+Condensed" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="style.css">
+
   <title>My List App</title>
 </head>
 <body ng-controller="MainController as ctrl">
@@ -15,11 +19,13 @@
   </header>
 
 
-  <h2>Category</h2>
+
+  <h2>To Do</h2>
   <main>
-    <div class="contain-in-theatres">
-      <div class="in-theatre" ng-repeat="list in ctrl.lists">
+    <div class="list-group">
+      <div class="list-group-item" ng-repeat="list in ctrl.lists">
         <div class="list-image">
+          <input type="checkbox" id="checkbox1" checked="checked">
           <h3>{{list.category}}</h3>
           <h4 ng-click="ctrl.deleteList(list.id)" class="add">Remove</h4>
           <h4 ng-click="ctrl.toEdit = list" onclick="openNav()" class="add">Edit</h4>
