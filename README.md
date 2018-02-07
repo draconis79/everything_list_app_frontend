@@ -1,7 +1,7 @@
 #The_Everything_List_Frontend
 <br>
 
-One stop for everything list.
+This is a grocery list app.
 
 <br>
 
@@ -19,21 +19,16 @@ One stop for everything list.
 
 <br>
 
-## Approach
-
-
-
-<br>
-
 ## Future Improvements
 
-
+- Filter lists by different categories
+- User login
 
 <br>
 
 ## Author
 
 - Mandy Tong
-- [Heroku Link:](https://everything-list.herokuapp.com/)
+- [Heroku Link:](https://everylist-app.herokuapp.com/)
 
 <br>
